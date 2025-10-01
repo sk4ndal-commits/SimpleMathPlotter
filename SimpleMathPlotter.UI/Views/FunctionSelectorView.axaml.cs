@@ -10,6 +10,5 @@ public partial class FunctionSelectorView : UserControl
     public FunctionSelectorView()
     {
         InitializeComponent();
-        DataContext = new FunctionSelectorViewModel();
     }
 }

@@ -10,6 +10,5 @@ public partial class RangeSettingsView : UserControl
     public RangeSettingsView()
     {
         InitializeComponent();
-        DataContext = new RangeSettingsViewModel();
     }
 }

@@ -10,6 +10,5 @@ public partial class GraphView : UserControl
     public GraphView()
     {
         InitializeComponent();
-        DataContext = new GraphViewModel();
     }
 }

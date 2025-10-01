@@ -14,9 +14,9 @@
 
             <ScrollViewer Grid.Column="0" Margin="10">
                 <StackPanel Spacing="12">
-                    <v:FunctionSelectorView />
-                    <v:ParameterSettingsView />
-                    <v:RangeSettingsView />
+                    <v:FunctionSelectorView DataContext="{Binding FunctionSelectorViewModel}"/>
+                    <v:ParameterSettingsView DataContext="{Binding ParameterSettingsViewModel}"/>
+                    <v:RangeSettingsView DataContext="{Binding RangeSettingsViewModel}"/>
                     <Button Content="Update Plot"
                             Command="{Binding UpdatePlotCommand}"
                             Margin="0,10,0,0" />

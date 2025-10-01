@@ -10,6 +10,5 @@ public partial class ParameterSettingsView : UserControl
     public ParameterSettingsView()
     {
         InitializeComponent();
-        DataContext = new ParameterSettingsViewModel();
     }
 }

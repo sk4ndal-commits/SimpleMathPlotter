@@ -102,18 +102,16 @@ public class RangeSettingsViewModel : ViewModelBase
 
     public bool TryGetX(out double xmin, out double xmax)
     {
-        var ok = double.TryParse(Xmin, out xmin) &&
-                 double.TryParse(Xmax, out xmax);
-        xmax = 0;
+        var ok = double.TryParse(Xmin, out xmin);
+        ok &= double.TryParse(Xmax, out xmax);
         ok &= xmin < xmax && xmin >= -1000 && xmax <= 1000;
         return ok;
     }
 
     public bool TryGetY(out double ymin, out double ymax)
     {
-        var ok = double.TryParse(Ymin, out ymin) &&
-                 double.TryParse(Ymax, out ymax);
-        ymax = 0;
+        var ok = double.TryParse(Ymin, out ymin);
+        ok &= double.TryParse(Ymax, out ymax);
         ok &= ymin < ymax && ymin >= -1000 && ymax <= 1000;
         return ok;
     }

@@ -68,7 +68,7 @@ public class GraphViewModel : ViewModelBase
         }
     }
 
-    private double _canvasWidth = 600;
+    private double _canvasWidth = 800;
 
     public double CanvasWidth
     {
@@ -83,7 +83,7 @@ public class GraphViewModel : ViewModelBase
         }
     }
 
-    private double _canvasHeight = 540;
+    private double _canvasHeight = 640;
 
     public double CanvasHeight
     {
