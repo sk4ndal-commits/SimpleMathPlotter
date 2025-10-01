@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:s="clr-namespace:Avalonia.Controls.Shapes;assembly=Avalonia.Controls"
+             xmlns:viewModels="clr-namespace:SimpleMathPlotter.Presentation.ViewModels;assembly=SimpleMathPlotter.Presentation"
+             x:DataType="viewModels:GraphViewModel"
+             x:Class="SimpleMathPlotter.UI.Views.GraphView">
+    <Grid>
+        <Canvas Background="White">
+            <s:Line StartPoint="0,270" EndPoint="680,270" Stroke="LightGray"
+                    StrokeThickness="1" />
+            <s:Line StartPoint="340,0" EndPoint="340,540" Stroke="LightGray"
+                    StrokeThickness="1" />
+            <s:Polyline Points="{Binding GraphPoints}" Stroke="Black"
+                        StrokeThickness="10" />
+        </Canvas>
+    </Grid>
+</UserControl>

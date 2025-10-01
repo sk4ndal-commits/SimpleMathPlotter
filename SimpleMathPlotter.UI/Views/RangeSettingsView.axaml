@@ -1,0 +1,21 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:SimpleMathPlotter.Presentation.ViewModels;assembly=SimpleMathPlotter.Presentation"
+             x:Class="SimpleMathPlotter.UI.Views.RangeSettingsView"
+             x:DataType="viewModels:RangeSettingsViewModel">
+    <StackPanel>
+        <TextBlock Text="Ranges" FontWeight="Bold" Margin="0,8,0,4"/>
+
+        <TextBlock Text="Xmin"/>
+        <TextBox Text="{Binding Xmin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Text="Xmax"/>
+        <TextBox Text="{Binding Xmax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Text="{Binding XError}" Foreground="Red" />
+
+        <TextBlock Text="Ymin" Margin="0,8,0,0"/>
+        <TextBox Text="{Binding Ymin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Text="Ymax"/>
+        <TextBox Text="{Binding Ymax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Text="{Binding YError}" Foreground="Red" />
+    </StackPanel>
+</UserControl>

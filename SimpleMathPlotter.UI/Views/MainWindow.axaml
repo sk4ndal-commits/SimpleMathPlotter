@@ -1,0 +1,29 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:v="clr-namespace:SimpleMathPlotter.UI.Views"
+        x:Class="SimpleMathPlotter.UI.Views.MainWindow"
+        xmlns:viewModels="clr-namespace:SimpleMathPlotter.Presentation.ViewModels;assembly=SimpleMathPlotter.Presentation"
+        x:DataType="viewModels:MainViewModel"
+        Title="Simple Math Plot"
+        Width="1000" Height="700">
+    <DockPanel>
+        <v:TopBarView DockPanel.Dock="Top" />
+        <v:MenuBarView DockPanel.Dock="Top" />
+
+        <Grid ColumnDefinitions="320,*">
+
+            <ScrollViewer Grid.Column="0" Margin="10">
+                <StackPanel Spacing="12">
+                    <v:FunctionSelectorView />
+                    <v:ParameterSettingsView />
+                    <v:RangeSettingsView />
+                    <Button Content="Update Plot"
+                            Command="{Binding UpdatePlotCommand}"
+                            Margin="0,10,0,0" />
+                </StackPanel>
+            </ScrollViewer>
+
+            <v:GraphView Grid.Column="1" Margin="10" />
+        </Grid>
+    </DockPanel>
+</Window>

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMathPlotter.UI", "SimpleMathPlotter.UI\SimpleMathPlotter.UI.csproj", "{DB08D89E-45E0-471A-A779-93EE7F3C0DF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMathPlotter.Core", "SimpleMathPlotter.Core\SimpleMathPlotter.Core.csproj", "{5C057CFB-3225-4CDD-9C6B-7CA67235BCF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMathPlotter.Infrastructure", "SimpleMathPlotter.Infrastructure\SimpleMathPlotter.Infrastructure.csproj", "{CE08896D-3BDA-4E56-BFD8-CFE3C93E5EE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMathPlotter.Presentation", "SimpleMathPlotter.Presentation\SimpleMathPlotter.Presentation.csproj", "{62BAC198-616E-4CE3-87A3-57EB9A557A4B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB08D89E-45E0-471A-A779-93EE7F3C0DF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB08D89E-45E0-471A-A779-93EE7F3C0DF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB08D89E-45E0-471A-A779-93EE7F3C0DF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB08D89E-45E0-471A-A779-93EE7F3C0DF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C057CFB-3225-4CDD-9C6B-7CA67235BCF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C057CFB-3225-4CDD-9C6B-7CA67235BCF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C057CFB-3225-4CDD-9C6B-7CA67235BCF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C057CFB-3225-4CDD-9C6B-7CA67235BCF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE08896D-3BDA-4E56-BFD8-CFE3C93E5EE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE08896D-3BDA-4E56-BFD8-CFE3C93E5EE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE08896D-3BDA-4E56-BFD8-CFE3C93E5EE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE08896D-3BDA-4E56-BFD8-CFE3C93E5EE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62BAC198-616E-4CE3-87A3-57EB9A557A4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62BAC198-616E-4CE3-87A3-57EB9A557A4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62BAC198-616E-4CE3-87A3-57EB9A557A4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62BAC198-616E-4CE3-87A3-57EB9A557A4B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

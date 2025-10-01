@@ -1,0 +1,11 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:SimpleMathPlotter.Presentation.ViewModels;assembly=SimpleMathPlotter.Presentation"
+             x:DataType="viewModels:FunctionSelectorViewModel"
+             x:Class="SimpleMathPlotter.UI.Views.FunctionSelectorView">
+    <StackPanel>
+        <TextBlock Text="Function" FontWeight="Bold"/>
+        <ComboBox ItemsSource="{Binding FunctionTypes}"
+                  SelectedItem="{Binding SelectedFunctionType}"/>
+    </StackPanel>
+</UserControl>

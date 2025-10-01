@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:SimpleMathPlotter.Presentation.ViewModels;assembly=SimpleMathPlotter.Presentation"
+             x:DataType="viewModels:ParameterSettingsViewModel"
+             x:Class="SimpleMathPlotter.UI.Views.ParameterSettingsView">
+    <StackPanel>
+        <TextBlock Text="Parameters" FontWeight="Bold" Margin="0,8,0,4" />
+
+        <TextBlock Text="Amplitude (A)" />
+        <TextBox
+            Text="{Binding Amplitude, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Text="{Binding AmplitudeError}"
+                   Foreground="Red" />
+
+        <TextBlock Text="Frequency (F)" />
+        <TextBox
+            Text="{Binding Frequency, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Text="{Binding FrequencyError}"
+                   Foreground="Red" />
+
+        <TextBlock Text="Phase (Phi)" />
+        <TextBox
+            Text="{Binding Phase, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Text="{Binding PhaseError}"
+                   Foreground="Red" />
+
+        <TextBlock Text="Offset (D)" />
+        <TextBox
+            Text="{Binding Offset, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Text="{Binding OffsetError}"
+                   Foreground="Red" />
+
+    </StackPanel>
+</UserControl>
