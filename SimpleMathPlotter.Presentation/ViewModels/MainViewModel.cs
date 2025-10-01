@@ -67,6 +67,13 @@ public class MainViewModel : ViewModelBase
         _ymin = ymin;
         _ymax = ymax;
 
+        GraphViewModel.Xmin = xmin;
+        GraphViewModel.Xmax = xmax;
+        GraphViewModel.Ymin = ymin;
+        GraphViewModel.Ymax = ymax;
+        var w = GraphViewModel.CanvasWidth;
+        var h = GraphViewModel.CanvasHeight;
+
         var functionParameters = new FunctionParameters
         {
             Amplitude = ParameterSettingsViewModel.AmplitudeValue,
@@ -84,22 +91,11 @@ public class MainViewModel : ViewModelBase
 
         _currentYValues = yValues;
 
-        const double W = 600, H = 540;
         var xs = _currentYValues.Select(p => p.x).ToList();
         var xMin = xs.Min();
         var xMax = xs.Max();
         var xSpan = xMax - xMin;
         var ySpan = ymax - ymin;
-
-        IEnumerable<Point> Map()
-        {
-            foreach (var (X, Y) in _currentYValues)
-            {
-                var sx = (X - xMin) / xSpan * W;
-                var sy = H - (Y - ymin) / ySpan * H;
-                yield return new Point(sx, sy);
-            }
-        }
 
         GraphViewModel.SetGraphPoints(Map());
 
@@ -110,6 +106,17 @@ public class MainViewModel : ViewModelBase
             xmax,
             ymin,
             ymax);
+        return;
+
+        IEnumerable<Point> Map()
+        {
+            foreach (var (x, y) in _currentYValues)
+            {
+                var sx = (x - xMin) / xSpan * w;
+                var sy = h - (y - ymin) / ySpan * h;
+                yield return new Point(sx, sy);
+            }
+        }
     }
 
     private void Load()

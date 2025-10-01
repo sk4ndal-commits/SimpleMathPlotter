@@ -4,14 +4,44 @@
              xmlns:viewModels="clr-namespace:SimpleMathPlotter.Presentation.ViewModels;assembly=SimpleMathPlotter.Presentation"
              x:DataType="viewModels:GraphViewModel"
              x:Class="SimpleMathPlotter.UI.Views.GraphView">
-    <Grid>
-        <Canvas Background="White">
-            <s:Line StartPoint="0,270" EndPoint="680,270" Stroke="LightGray"
-                    StrokeThickness="1" />
-            <s:Line StartPoint="340,0" EndPoint="340,540" Stroke="LightGray"
-                    StrokeThickness="1" />
-            <s:Polyline Points="{Binding GraphPoints}" Stroke="Black"
-                        StrokeThickness="10" />
-        </Canvas>
-    </Grid>
+
+    <Canvas Background="White"
+            Width="{Binding CanvasWidth}"
+            Height="{Binding CanvasHeight}">
+
+        <!-- X Axis -->
+        <s:Line StartPoint="{Binding XAxisStart}"
+                EndPoint="{Binding XAxisEnd}"
+                Stroke="LightGray" StrokeThickness="1" />
+
+        <!-- Y Axis -->
+        <s:Line StartPoint="{Binding YAxisStart}"
+                EndPoint="{Binding YAxisEnd}"
+                Stroke="LightGray" StrokeThickness="1" />
+
+        <!-- Function Plot -->
+        <s:Polyline Points="{Binding GraphPoints}" Stroke="Black"
+                    StrokeThickness="2" />
+
+        <!-- Axis Labels -->
+        <TextBlock Text="{Binding Xmin}"
+                   Canvas.Left="{Binding XminLabelLeft}"
+                   Canvas.Top="{Binding XminLabelTop}"
+                   FontSize="12" />
+
+        <TextBlock Text="{Binding Xmax}"
+                   Canvas.Left="{Binding XmaxLabelLeft}"
+                   Canvas.Top="{Binding XmaxLabelTop}"
+                   FontSize="12" />
+
+        <TextBlock Text="{Binding Ymin}"
+                   Canvas.Left="{Binding YminLabelLeft}"
+                   Canvas.Top="{Binding YminLabelTop}"
+                   FontSize="12" />
+
+        <TextBlock Text="{Binding Ymax}"
+                   Canvas.Left="{Binding YmaxLabelLeft}"
+                   Canvas.Top="{Binding YmaxLabelTop}"
+                   FontSize="12" />
+    </Canvas>
 </UserControl>
