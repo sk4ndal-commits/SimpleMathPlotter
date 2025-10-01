@@ -23,7 +23,7 @@
                 </StackPanel>
             </ScrollViewer>
 
-            <v:GraphView Grid.Column="1" Margin="10" />
+            <v:GraphView DataContext="{Binding GraphViewModel}" Grid.Column="1" Margin="10" />
         </Grid>
     </DockPanel>
 </Window>
