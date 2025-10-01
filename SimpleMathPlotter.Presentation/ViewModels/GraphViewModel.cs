@@ -126,17 +126,17 @@ public class GraphViewModel : ViewModelBase
     }
 
     // --- Label positions ---
-    public double XminLabelLeft => 0;
-    public double XminLabelTop => CanvasHeight - 20;
+    public double XminLabelLeft => 8;
+    public double XminLabelTop => (_ymin < 0 && _ymax > 0) ? XAxisStart.Y + 8 : CanvasHeight - 24;
 
-    public double XmaxLabelLeft => CanvasWidth - 30;
-    public double XmaxLabelTop => CanvasHeight - 20;
+    public double XmaxLabelLeft => CanvasWidth - 38;
+    public double XmaxLabelTop => (_ymin < 0 && _ymax > 0) ? XAxisStart.Y + 8 : CanvasHeight - 24;
 
-    public double YminLabelLeft => 4;
-    public double YminLabelTop => CanvasHeight - 20;
+    public double YminLabelLeft => (_xmin < 0 && _xmax > 0) ? YAxisStart.X - 18 : 8;
+    public double YminLabelTop => CanvasHeight - 24;
 
-    public double YmaxLabelLeft => 4;
-    public double YmaxLabelTop => 0;
+    public double YmaxLabelLeft => (_xmin < 0 && _xmax > 0) ? YAxisStart.X - 18 : 8;
+    public double YmaxLabelTop => 8;
 
     public void SetGraphPoints(IEnumerable<Point> points)
     {
