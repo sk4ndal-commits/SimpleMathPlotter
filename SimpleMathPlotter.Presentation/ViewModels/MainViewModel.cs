@@ -42,7 +42,7 @@ public class MainViewModel : ViewModelBase
             {
                 if (pathObj is string path && !string.IsNullOrWhiteSpace(path))
                     exportService.Export(_currentYValues, path, _ymin, _ymax);
-            }, 
+            },
             _ => _currentYValues.Count != 0);
     }
 
@@ -57,66 +57,93 @@ public class MainViewModel : ViewModelBase
 
     private void UpdatePlot()
     {
-        if (!RangeSettingsViewModel.TryGetX(out var xmin, out var xmax))
-            return;
-        if (!RangeSettingsViewModel.TryGetY(out var ymin, out var ymax))
-            return;
-        if (ParameterSettingsViewModel.HasErrors)
+        if (!TryGetRanges(out var xmin, out var xmax, out var ymin, out var ymax))
             return;
 
         _ymin = ymin;
         _ymax = ymax;
 
+        UpdateGraphViewModelRanges(xmin, xmax, ymin, ymax);
+
+        var functionParameters = CreateFunctionParameters();
+        _currentYValues = EvaluateFunction(functionParameters, xmin, xmax);
+
+        var w = GraphViewModel.CanvasWidth;
+        var h = GraphViewModel.CanvasHeight;
+
+        GraphViewModel.SetGraphPoints(MapGraphPoints(_currentYValues, ymin, ymax, w, h));
+
+        SaveState(functionParameters, xmin, xmax, ymin, ymax);
+    }
+
+    private bool TryGetRanges(out double xmin, out double xmax, out double ymin, out double ymax)
+    {
+        xmin = xmax = ymin = ymax = 0;
+        if (!RangeSettingsViewModel.TryGetX(out xmin, out xmax))
+            return false;
+        if (!RangeSettingsViewModel.TryGetY(out ymin, out ymax))
+            return false;
+        if (ParameterSettingsViewModel.HasErrors)
+            return false;
+        return true;
+    }
+
+    private void UpdateGraphViewModelRanges(double xmin, double xmax, double ymin, double ymax)
+    {
         GraphViewModel.Xmin = xmin;
         GraphViewModel.Xmax = xmax;
         GraphViewModel.Ymin = ymin;
         GraphViewModel.Ymax = ymax;
-        var w = GraphViewModel.CanvasWidth;
-        var h = GraphViewModel.CanvasHeight;
+    }
 
-        var functionParameters = new FunctionParameters
+    private FunctionParameters CreateFunctionParameters()
+    {
+        return new FunctionParameters
         {
             Amplitude = ParameterSettingsViewModel.AmplitudeValue,
             Frequency = ParameterSettingsViewModel.FrequencyValue,
             Phase = ParameterSettingsViewModel.PhaseValue,
             Offset = ParameterSettingsViewModel.OffsetValue
         };
+    }
 
-        var yValues = _functionEngine.Evaluate(
+    private List<(double x, double y)> EvaluateFunction(FunctionParameters parameters, double xmin, double xmax)
+    {
+        return _functionEngine.Evaluate(
             FunctionSelectorViewModel.SelectedFunctionType,
-            functionParameters,
+            parameters,
             xmin,
             xmax,
             1200).ToList();
+    }
 
-        _currentYValues = yValues;
-
-        var xs = _currentYValues.Select(p => p.x).ToList();
-        var xMin = xs.Min();
-        var xMax = xs.Max();
+    private static IEnumerable<Point> MapGraphPoints(
+        List<(double x, double y)> points,
+        double ymin, double ymax,
+        double w, double h)
+    {
+        var xMin = points.Min(p => p.x);
+        var xMax = points.Max(p => p.x);
         var xSpan = xMax - xMin;
         var ySpan = ymax - ymin;
 
-        GraphViewModel.SetGraphPoints(Map());
+        foreach (var (x, y) in points)
+        {
+            var sx = (x - xMin) / xSpan * w;
+            var sy = h - (y - ymin) / ySpan * h;
+            yield return new Point(sx, sy);
+        }
+    }
 
+    private void SaveState(FunctionParameters parameters, double xmin, double xmax, double ymin, double ymax)
+    {
         _persistenceService.Save(
             FunctionSelectorViewModel.SelectedFunctionType,
-            functionParameters,
+            parameters,
             xmin,
             xmax,
             ymin,
             ymax);
-        return;
-
-        IEnumerable<Point> Map()
-        {
-            foreach (var (x, y) in _currentYValues)
-            {
-                var sx = (x - xMin) / xSpan * w;
-                var sy = h - (y - ymin) / ySpan * h;
-                yield return new Point(sx, sy);
-            }
-        }
     }
 
     private void Load()
