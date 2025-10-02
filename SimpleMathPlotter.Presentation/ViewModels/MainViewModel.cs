@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Globalization;
 using Avalonia;
 using SimpleMathPlotter.Core.Interfaces;
@@ -27,8 +28,6 @@ public class MainViewModel : ViewModelBase
 
     #endregion
 
-
-    public RelayCommand UpdatePlotCommand { get; }
     public RelayCommand ExportCommand { get; }
 
     public MainViewModel(
@@ -39,13 +38,6 @@ public class MainViewModel : ViewModelBase
         _functionEngine = functionEngine;
         _persistenceService = persistenceService;
 
-        Load();
-        UpdatePlot();
-
-        UpdatePlotCommand = new RelayCommand(
-            _ => UpdatePlot(),
-            _ => CanPlot());
-
         ExportCommand = new RelayCommand(
             pathObj =>
             {
@@ -53,6 +45,10 @@ public class MainViewModel : ViewModelBase
                     exportService.Export(_currentYValues, path, _ymin, _ymax);
             },
             _ => _currentYValues.Count != 0);
+        
+        RegisterEventHandlers();
+        Load();
+        UpdatePlot();
     }
 
     private List<(double x, double y)> _currentYValues = [];
@@ -169,5 +165,33 @@ public class MainViewModel : ViewModelBase
         RangeSettingsViewModel.Xmax = xmax.ToString(CultureInfo.InvariantCulture);
         RangeSettingsViewModel.Ymin = ymin.ToString(CultureInfo.InvariantCulture);
         RangeSettingsViewModel.Ymax = ymax.ToString(CultureInfo.InvariantCulture);
+    }
+
+    private void RegisterEventHandlers()
+    {
+        RangeSettingsViewModel.PropertyChanged += OnSubViewModelPropertyChanged;
+        ParameterSettingsViewModel.PropertyChanged += OnSubViewModelPropertyChanged;
+        FunctionSelectorViewModel.PropertyChanged += OnSubViewModelPropertyChanged;
+    }
+    
+    private void OnSubViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (!HasRelevantPropertyChanged(e)) return;
+        
+        if (CanPlot()) UpdatePlot();
+    }
+
+    private static bool HasRelevantPropertyChanged(PropertyChangedEventArgs e)
+    {
+        return e.PropertyName is nameof(RangeSettingsViewModel.Xmin) or
+            nameof(RangeSettingsViewModel.Xmax) or
+            nameof(RangeSettingsViewModel.Ymin) or
+            nameof(RangeSettingsViewModel.Ymax) or
+            nameof(ParameterSettingsViewModel.Amplitude) or
+            nameof(ParameterSettingsViewModel.Frequency) or
+            nameof(ParameterSettingsViewModel.Phase) or
+            nameof(ParameterSettingsViewModel.Offset) or
+            nameof(ParameterSettingsViewModel.HasErrors) or
+            nameof(FunctionSelectorViewModel.SelectedFunctionType);
     }
 }

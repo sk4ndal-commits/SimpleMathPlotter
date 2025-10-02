@@ -121,6 +121,7 @@ public class ParameterSettingsViewModel : ViewModelBase
             AmplitudeError = "Amplitude must be between -100 and 100.";
         else
             AmplitudeError = string.Empty;
+        OnPropertyChanged(nameof(HasErrors));
     }
 
     private void ValidateFrequency()
@@ -131,6 +132,7 @@ public class ParameterSettingsViewModel : ViewModelBase
             FrequencyError = "Frequency must be between 0 and 100.";
         else
             FrequencyError = string.Empty;
+        OnPropertyChanged(nameof(HasErrors));
     }
 
     private void ValidatePhase()
@@ -141,6 +143,7 @@ public class ParameterSettingsViewModel : ViewModelBase
             PhaseError = "Phase must be between [-2π, 2π].";
         else
             PhaseError = string.Empty;
+        OnPropertyChanged(nameof(HasErrors));
     }
 
     private void ValidateOffset()
@@ -151,6 +154,7 @@ public class ParameterSettingsViewModel : ViewModelBase
             OffsetError = "Offset must be between -100 and 100.";
         else
             OffsetError = string.Empty;
+        OnPropertyChanged(nameof(HasErrors));
     }
 
     #endregion
