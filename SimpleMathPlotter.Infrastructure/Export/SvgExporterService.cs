@@ -3,6 +3,9 @@ using SimpleMathPlotter.Core.Interfaces;
 
 namespace SimpleMathPlotter.Infrastructure.Export;
 
+/// <summary>
+/// Class that exports function data to an SVG file.
+/// </summary>
 public class SvgExporterService : IExportService
 {
     /// <inheritdoc cref="IExportService"/>

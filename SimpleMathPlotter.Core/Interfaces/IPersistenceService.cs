@@ -2,6 +2,9 @@ using SimpleMathPlotter.Core.Models;
 
 namespace SimpleMathPlotter.Core.Interfaces;
 
+/// <summary>
+/// Contract for a service that persists function data to a file.
+/// </summary>
 public interface IPersistenceService
 {
     /// <summary>

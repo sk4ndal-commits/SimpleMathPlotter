@@ -2,6 +2,9 @@ using SimpleMathPlotter.Presentation.Utils;
 
 namespace SimpleMathPlotter.Presentation.ViewModels;
 
+/// <summary>
+/// ViewModel for configuring parameters of a mathematical function.
+/// </summary>
 public class ParameterSettingsViewModel : ViewModelBase
 {
     #region Parameters

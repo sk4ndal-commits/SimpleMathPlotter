@@ -3,6 +3,9 @@ using SimpleMathPlotter.Core.Models;
 
 namespace SimpleMathPlotter.Core.Services;
 
+/// <summary>
+/// Class that evaluates mathematical functions over a specified range.
+/// </summary>
 public class FunctionEngine : IFunctionEngine
 {
     /// <inheritdoc cref="IFunctionEngine"/>

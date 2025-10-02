@@ -2,6 +2,9 @@ using SimpleMathPlotter.Core.Models;
 
 namespace SimpleMathPlotter.Core.Interfaces;
 
+/// <summary>
+/// Contract for a service that evaluates mathematical functions.
+/// </summary>
 public interface IFunctionEngine
 {
     /// <summary>

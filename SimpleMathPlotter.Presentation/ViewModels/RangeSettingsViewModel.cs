@@ -2,6 +2,9 @@ using SimpleMathPlotter.Presentation.Utils;
 
 namespace SimpleMathPlotter.Presentation.ViewModels;
 
+/// <summary>
+/// ViewModel for configuring the X and Y axis ranges.
+/// </summary>
 public class RangeSettingsViewModel : ViewModelBase
 {
     #region Ranges

@@ -6,6 +6,10 @@ using SimpleMathPlotter.Presentation.Utils;
 
 namespace SimpleMathPlotter.Presentation.ViewModels;
 
+/// <summary>
+/// ViewModel for the main application logic, coordinating function selection,
+/// parameter settings, range settings, and graph plotting.
+/// </summary>
 public class MainViewModel : ViewModelBase
 {
     private readonly IFunctionEngine _functionEngine;

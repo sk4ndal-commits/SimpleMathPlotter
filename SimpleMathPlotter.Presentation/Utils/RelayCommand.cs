@@ -2,6 +2,9 @@ using System.Windows.Input;
 
 namespace SimpleMathPlotter.Presentation.Utils;
 
+/// <summary>
+/// Class representing a command that can be bound to UI elements.
+/// </summary>
 public class RelayCommand : ICommand
 {
     private readonly Action<object?> _execute;
@@ -21,7 +24,4 @@ public class RelayCommand : ICommand
     public void Execute(object? parameter) => _execute(parameter);
 
     public event EventHandler? CanExecuteChanged;
-    
-    public void RaiseCanExecuteChanged() => 
-        CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 }

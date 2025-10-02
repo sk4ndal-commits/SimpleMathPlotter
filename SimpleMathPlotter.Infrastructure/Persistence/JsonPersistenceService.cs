@@ -4,6 +4,9 @@ using SimpleMathPlotter.Core.Models;
 
 namespace SimpleMathPlotter.Infrastructure.Persistence;
 
+/// <summary>
+/// Class responsible for persisting function data to a JSON file.
+/// </summary>
 public class JsonPersistenceService : IPersistenceService
 {
     private static string SettingsPath =>

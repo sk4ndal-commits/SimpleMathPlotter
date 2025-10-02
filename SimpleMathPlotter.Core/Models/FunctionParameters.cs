@@ -1,5 +1,8 @@
 namespace SimpleMathPlotter.Core.Models;
 
+/// <summary>
+/// Contains parameters for mathematical functions.
+/// </summary>
 public class FunctionParameters
 {
     public double Amplitude { get; set; } = 1.0;

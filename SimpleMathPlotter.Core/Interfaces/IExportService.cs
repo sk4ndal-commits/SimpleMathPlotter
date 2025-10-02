@@ -1,5 +1,8 @@
 namespace SimpleMathPlotter.Core.Interfaces;
 
+/// <summary>
+/// Contract for a service that exports function data to a file.
+/// </summary>
 public interface IExportService
 {
     

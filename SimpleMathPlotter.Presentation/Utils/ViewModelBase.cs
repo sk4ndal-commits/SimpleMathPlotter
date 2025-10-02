@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace SimpleMathPlotter.Presentation.Utils;
 
+/// <summary>
+/// Class representing a base view model that implements INotifyPropertyChanged.
+/// </summary>
 public abstract class ViewModelBase : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;

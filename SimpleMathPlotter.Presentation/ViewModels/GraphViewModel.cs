@@ -4,6 +4,9 @@ using SimpleMathPlotter.Presentation.Utils;
 
 namespace SimpleMathPlotter.Presentation.ViewModels;
 
+/// <summary>
+/// ViewModel for managing graph data and axis rendering.
+/// </summary>
 public class GraphViewModel : ViewModelBase
 {
     public AvaloniaList<Point> GraphPoints { get; } = [];

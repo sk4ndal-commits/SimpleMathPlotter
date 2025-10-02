@@ -3,6 +3,9 @@ using SimpleMathPlotter.Presentation.Utils;
 
 namespace SimpleMathPlotter.Presentation.ViewModels;
 
+/// <summary>
+/// ViewModel for selecting a mathematical function type.
+/// </summary>
 public class FunctionSelectorViewModel : ViewModelBase
 {
     private FunctionType _selectedFunctionType = FunctionType.Sin;
