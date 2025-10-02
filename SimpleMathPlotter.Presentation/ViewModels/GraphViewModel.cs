@@ -11,7 +11,13 @@ public class GraphViewModel : ViewModelBase
 {
     public AvaloniaList<Point> GraphPoints { get; } = [];
 
+
+    #region Ranges
+
     private double _xmin;
+    private double _xmax;
+    private double _ymin;
+    private double _ymax;
 
     public double Xmin
     {
@@ -26,8 +32,6 @@ public class GraphViewModel : ViewModelBase
         }
     }
 
-    private double _xmax;
-
     public double Xmax
     {
         get => _xmax;
@@ -41,7 +45,6 @@ public class GraphViewModel : ViewModelBase
         }
     }
 
-    private double _ymin;
 
     public double Ymin
     {
@@ -56,7 +59,6 @@ public class GraphViewModel : ViewModelBase
         }
     }
 
-    private double _ymax;
 
     public double Ymax
     {
@@ -71,7 +73,12 @@ public class GraphViewModel : ViewModelBase
         }
     }
 
+    #endregion
+
+    #region Canvas
+
     private double _canvasWidth = 800;
+    private double _canvasHeight = 640;
 
     public double CanvasWidth
     {
@@ -86,8 +93,6 @@ public class GraphViewModel : ViewModelBase
         }
     }
 
-    private double _canvasHeight = 640;
-
     public double CanvasHeight
     {
         get => _canvasHeight;
@@ -101,7 +106,10 @@ public class GraphViewModel : ViewModelBase
         }
     }
 
-    // --- Axis coordinates ---
+    #endregion
+
+    #region AxisCoordinates
+
     private Point _xAxisStart, _xAxisEnd, _yAxisStart, _yAxisEnd;
 
     public Point XAxisStart
@@ -128,7 +136,10 @@ public class GraphViewModel : ViewModelBase
         private set => SetField(ref _yAxisEnd, value);
     }
 
-    // --- Label positions ---
+    #endregion
+
+    #region Labels
+
     public double XminLabelLeft => 8;
     public double XminLabelTop => (_ymin < 0 && _ymax > 0) ? XAxisStart.Y + 8 : CanvasHeight - 24;
 
@@ -140,6 +151,8 @@ public class GraphViewModel : ViewModelBase
 
     public double YmaxLabelLeft => (_xmin < 0 && _xmax > 0) ? YAxisStart.X - 18 : 8;
     public double YmaxLabelTop => 8;
+
+    #endregion
 
     public void SetGraphPoints(IEnumerable<Point> points)
     {
@@ -153,7 +166,6 @@ public class GraphViewModel : ViewModelBase
         if (Math.Abs(_xmax - _xmin) < 1e-8 || Math.Abs(_ymax - _ymin) < 1e-8)
             return;
 
-        // X axis at y=0 (only if visible in range)
         if (_ymin < 0 && _ymax > 0)
         {
             var y = MapY(0);
@@ -165,7 +177,6 @@ public class GraphViewModel : ViewModelBase
             XAxisStart = XAxisEnd = new Point(-1, -1); // hide off-canvas
         }
 
-        // Y axis at x=0 (only if visible in range)
         if (_xmin < 0 && _xmax > 0)
         {
             var x = MapX(0);

@@ -15,6 +15,8 @@ public class MainViewModel : ViewModelBase
     private readonly IFunctionEngine _functionEngine;
     private readonly IPersistenceService _persistenceService;
 
+    #region ViewModels
+
     public FunctionSelectorViewModel FunctionSelectorViewModel { get; } = new();
 
     public ParameterSettingsViewModel ParameterSettingsViewModel { get; } =
@@ -22,6 +24,9 @@ public class MainViewModel : ViewModelBase
 
     public RangeSettingsViewModel RangeSettingsViewModel { get; } = new();
     public GraphViewModel GraphViewModel { get; } = new();
+
+    #endregion
+
 
     public RelayCommand UpdatePlotCommand { get; }
     public RelayCommand ExportCommand { get; }
@@ -72,10 +77,10 @@ public class MainViewModel : ViewModelBase
         var functionParameters = CreateFunctionParameters();
         _currentYValues = EvaluateFunction(functionParameters, xmin, xmax);
 
-        var w = GraphViewModel.CanvasWidth;
-        var h = GraphViewModel.CanvasHeight;
+        var width = GraphViewModel.CanvasWidth;
+        var height = GraphViewModel.CanvasHeight;
 
-        GraphViewModel.SetGraphPoints(MapGraphPoints(_currentYValues, ymin, ymax, w, h));
+        GraphViewModel.SetGraphPoints(MapGraphPoints(_currentYValues, ymin, ymax, width, height));
 
         SaveState(functionParameters, xmin, xmax, ymin, ymax);
     }
@@ -83,12 +88,9 @@ public class MainViewModel : ViewModelBase
     private bool TryGetRanges(out double xmin, out double xmax, out double ymin, out double ymax)
     {
         xmin = xmax = ymin = ymax = 0;
-        if (!RangeSettingsViewModel.TryGetX(out xmin, out xmax))
-            return false;
-        if (!RangeSettingsViewModel.TryGetY(out ymin, out ymax))
-            return false;
-        if (ParameterSettingsViewModel.HasErrors)
-            return false;
+        if (!RangeSettingsViewModel.TryGetX(out xmin, out xmax)) return false;
+        if (!RangeSettingsViewModel.TryGetY(out ymin, out ymax)) return false;
+        if (ParameterSettingsViewModel.HasErrors) return false;
         return true;
     }
 
@@ -158,22 +160,14 @@ public class MainViewModel : ViewModelBase
         var (type, parameters, xmin, xmax, ymin, ymax) = loaded.Value;
         FunctionSelectorViewModel.SelectedFunctionType = type;
 
-        ParameterSettingsViewModel.Amplitude =
-            parameters.Amplitude.ToString(CultureInfo.InvariantCulture);
-        ParameterSettingsViewModel.Frequency =
-            parameters.Frequency.ToString(CultureInfo.InvariantCulture);
-        ParameterSettingsViewModel.Phase =
-            parameters.Phase.ToString(CultureInfo.InvariantCulture);
-        ParameterSettingsViewModel.Offset =
-            parameters.Offset.ToString(CultureInfo.InvariantCulture);
+        ParameterSettingsViewModel.Amplitude = parameters.Amplitude.ToString(CultureInfo.InvariantCulture);
+        ParameterSettingsViewModel.Frequency = parameters.Frequency.ToString(CultureInfo.InvariantCulture);
+        ParameterSettingsViewModel.Phase = parameters.Phase.ToString(CultureInfo.InvariantCulture);
+        ParameterSettingsViewModel.Offset = parameters.Offset.ToString(CultureInfo.InvariantCulture);
 
-        RangeSettingsViewModel.Xmin =
-            xmin.ToString(CultureInfo.InvariantCulture);
-        RangeSettingsViewModel.Xmax =
-            xmax.ToString(CultureInfo.InvariantCulture);
-        RangeSettingsViewModel.Ymin =
-            ymin.ToString(CultureInfo.InvariantCulture);
-        RangeSettingsViewModel.Ymax =
-            ymax.ToString(CultureInfo.InvariantCulture);
+        RangeSettingsViewModel.Xmin = xmin.ToString(CultureInfo.InvariantCulture);
+        RangeSettingsViewModel.Xmax = xmax.ToString(CultureInfo.InvariantCulture);
+        RangeSettingsViewModel.Ymin = ymin.ToString(CultureInfo.InvariantCulture);
+        RangeSettingsViewModel.Ymax = ymax.ToString(CultureInfo.InvariantCulture);
     }
 }

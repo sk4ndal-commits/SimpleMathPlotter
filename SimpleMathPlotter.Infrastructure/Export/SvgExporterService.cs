@@ -34,18 +34,18 @@ public class SvgExporterService : IExportService
         sw.WriteLine(
             $"<line x1='{width / 2}' y1='0' x2='{width / 2}' y2='{height}' stroke='lightgray'/>");
 
-        var poly = string.Join(" ", pts.Select(MapPoint));
+        var poly = string.Join(" ", pts.Select(p => MapPoint(p, xmin, xmax, yMin, yMax, width, height)));
         sw.WriteLine(
             $"<polyline fill='none' stroke='black' stroke-width='1' points='{poly}' />");
         sw.WriteLine("</svg>");
-        return;
+    }
 
-        string MapPoint((double x, double y) p)
-        {
-            var sx = (p.x - xmin) / (xmax - xmin) * width;
-            var sy = height - (p.y - yMin) / (yMax - yMin) * height;
-            return
-                $"{sx.ToString(CultureInfo.InvariantCulture)},{sy.ToString(CultureInfo.InvariantCulture)}";
-        }
+    private static string MapPoint((double x, double y) p, double xmin, double xmax, double ymin, double ymax,
+        double width, double height)
+    {
+        var sx = (p.x - xmin) / (xmax - xmin) * width;
+        var sy = height - (p.y - ymin) / (ymax - ymin) * height;
+        return
+            $"{sx.ToString(CultureInfo.InvariantCulture)},{sy.ToString(CultureInfo.InvariantCulture)}";
     }
 }
