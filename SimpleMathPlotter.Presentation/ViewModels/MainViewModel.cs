@@ -42,9 +42,9 @@ public class MainViewModel : ViewModelBase
             pathObj =>
             {
                 if (pathObj is string path && !string.IsNullOrWhiteSpace(path))
-                    exportService.Export(_currentYValues, path, _ymin, _ymax);
+                    exportService.Export(_currentGraphValues, path, _ymin, _ymax);
             },
-            _ => _currentYValues.Count != 0);
+            _ => _currentGraphValues.Count != 0);
         
         RegisterEventHandlers();
         Load();
@@ -56,7 +56,7 @@ public class MainViewModel : ViewModelBase
         UnregisterEventHandlers();
     }
 
-    private List<(double x, double y)> _currentYValues = [];
+    private List<(double x, double y)> _currentGraphValues = [];
     private double _ymin = -5;
     private double _ymax = 5;
 
@@ -76,12 +76,12 @@ public class MainViewModel : ViewModelBase
         UpdateGraphViewModelRanges(xmin, xmax, ymin, ymax);
 
         var functionParameters = CreateFunctionParameters();
-        _currentYValues = EvaluateFunction(functionParameters, xmin, xmax);
+        _currentGraphValues = EvaluateFunction(functionParameters, xmin, xmax);
 
         var width = GraphViewModel.CanvasWidth;
         var height = GraphViewModel.CanvasHeight;
 
-        GraphViewModel.SetGraphPoints(MapGraphPoints(_currentYValues, ymin, ymax, width, height));
+        GraphViewModel.SetGraphPoints(MapGraphPoints(_currentGraphValues, ymin, ymax, width, height));
 
         SaveState(functionParameters, xmin, xmax, ymin, ymax);
     }
@@ -89,9 +89,9 @@ public class MainViewModel : ViewModelBase
     private bool TryGetRanges(out double xmin, out double xmax, out double ymin, out double ymax)
     {
         xmin = xmax = ymin = ymax = 0;
-        if (!RangeSettingsViewModel.TryGetX(out xmin, out xmax)) return false;
-        if (!RangeSettingsViewModel.TryGetY(out ymin, out ymax)) return false;
-        if (ParameterSettingsViewModel.HasErrors) return false;
+        if (!RangeSettingsViewModel.TryGetX(out xmin, out xmax )
+            ||!RangeSettingsViewModel.TryGetY(out ymin, out ymax)
+            || ParameterSettingsViewModel.HasErrors) return false;
         return true;
     }
 
