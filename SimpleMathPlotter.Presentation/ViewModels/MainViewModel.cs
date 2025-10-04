@@ -50,6 +50,11 @@ public class MainViewModel : ViewModelBase
         Load();
         UpdatePlot();
     }
+    
+    ~MainViewModel()
+    {
+        UnregisterEventHandlers();
+    }
 
     private List<(double x, double y)> _currentYValues = [];
     private double _ymin = -5;
@@ -173,7 +178,14 @@ public class MainViewModel : ViewModelBase
         ParameterSettingsViewModel.PropertyChanged += OnSubViewModelPropertyChanged;
         FunctionSelectorViewModel.PropertyChanged += OnSubViewModelPropertyChanged;
     }
-    
+
+    private void UnregisterEventHandlers()
+    {
+        RangeSettingsViewModel.PropertyChanged -= OnSubViewModelPropertyChanged;
+        ParameterSettingsViewModel.PropertyChanged -= OnSubViewModelPropertyChanged;
+        FunctionSelectorViewModel.PropertyChanged -= OnSubViewModelPropertyChanged;
+    }
+
     private void OnSubViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (!HasRelevantPropertyChanged(e)) return;

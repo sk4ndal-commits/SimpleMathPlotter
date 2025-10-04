@@ -174,7 +174,7 @@ public class GraphViewModel : ViewModelBase
         }
         else
         {
-            XAxisStart = XAxisEnd = new Point(-1, -1); // hide off-canvas
+            XAxisStart = XAxisEnd = new Point(-1, -1);
         }
 
         if (_xmin < 0 && _xmax > 0)
