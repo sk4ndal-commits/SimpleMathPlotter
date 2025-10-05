@@ -9,6 +9,34 @@ SimpleMathPlotter is a cross-platform application for visualizing mathematical f
 - Modular architecture with clear separation of concerns
 - Extensible function engine and export services
 
+### Instant Feedback
+
+Switching Frequency from 1 to 5 yields instant update:
+![Instant Reload 1](./images/updates/instant_update_F_1.png)
+![Instant Reload 5](./images/updates/instant_update_F_5.png)
+
+### Validation
+
+Validation for input types and ranges:
+
+![Validation](./images/validation/validation.png)
+
+### Persistence
+
+Persists the last parameter set.
+
+Fresh start:
+![Fresh Start](./images/persistence/fresh_start.png)
+
+After changing parameters and restarting:
+![Restart](./images/persistence/after_restart.png)
+
+### Export
+
+Export graph as svg:
+
+![Export](./images/export/export.png)
+
 ## Technologies Used
 
 - **C# 9.0+**
@@ -49,17 +77,7 @@ SimpleMathPlotter is a cross-platform application for visualizing mathematical f
 - Select or define a mathematical function in the UI
 - Adjust parameters and ranges as needed
 - View the plotted graph in real time
-- Export graphs or save function configurations (if implemented)
-
-## Code Quality
-
-- Follows SOLID principles and clean architecture
-- Separation of UI, business logic, and infrastructure
-- Readable, maintainable, and well-documented code
-
-## License
-
-This project is licensed under the MIT License.
+- Export graphs or save function configurations
 
 ---
 
